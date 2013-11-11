@@ -24,7 +24,7 @@ module.exports = function(grunt) {
       },
       all: ['Gruntfile.js', 'tasks/**/*.js', 'test/**/*.js']
     },
-    clean: {
+    "clean-test-data": {
       actual: [
         'test/actual/**/*.*'
       ]
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
         dest: 'test/actual/'
       }
     },
-    "regex-replace": {
+    "build-test-data": {
       noflags: {
         src: ['test/actual/noflags.txt'],
         actions: [
@@ -121,8 +121,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   // Load local tasks.
   grunt.loadTasks('tasks');
-
   grunt.registerTask('default', ['test']);
-  grunt.registerTask('test', ['clean', 'jshint', 'copy:fixtures', 'regex-replace', 'nodeunit']);
+  grunt.registerTask('test', ['clean-test-data', 'jshint', 'copy:fixtures', 'build-test-data', 'nodeunit']);
 
 };
+
