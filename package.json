@@ -17,7 +17,6 @@
     }
   ],
   "main": "Gruntfile.js",
-  "bin": "bin/grunt-jsp-cleaner",
   "engines": {
     "node": "*"
   },

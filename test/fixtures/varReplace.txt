@@ -1,0 +1,6 @@
+<%=variable1%>
+<%= variable1%>
+<%=   variable1%>
+<%=vAriABle1%>
+<%=variable2%>
+<%=variable3%>

@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     watch: {
-      files: '<%= jshint.all %>',
+      files: '*',
       tasks: 'default'
     },
     jshint: {
@@ -24,93 +24,31 @@ module.exports = function(grunt) {
       },
       all: ['Gruntfile.js', 'tasks/**/*.js', 'test/**/*.js']
     },
-    "clean-test-data": {
-      actual: [
-        'test/actual/**/*.*'
+    clean: {
+      "functional-test-data":[
+        'test/temp/**/*.*'
       ]
-    },
-    copy: {
-      fixtures: {
-        expand: true,
-        cwd: 'test/fixtures/',
-        src: ['*.txt'],
-        dest: 'test/actual/'
-      }
-    },
-    "build-test-data": {
-      noflags: {
-        src: ['test/actual/noflags.txt'],
-        actions: [
-          {
-            search: 'field',
-            replace: 'replaced'
-          },
-          {
-            search: 'o[\\w]{3}r([0-9])',
-            replace: 'ok$1'
-          }
-        ]
-      },
-      emptyflags: {
-        src: ['test/actual/emptyflags.txt'],
-        actions: [
-          {
-            search: 'field',
-            replace: 'replaced',
-            flags: ''
-          }
-        ]
-      },
-      caseinsensitive: {
-        src: ['test/actual/caseinsensitive.txt'],
-        actions: [
-          {
-            search: 'field',
-            replace: 'replaced',
-            flags: 'gi'
-          }
-        ]
-      },
-      multiline: {
-        src: ['test/actual/multiline.txt'],
-        actions: [
-          {
-            search: '^- ',
-            replace: '',
-            flags: 'gm'
-          }
-        ]
-      },
-      regexpobjectsearch: {
-        src: ['test/actual/regexpobjectsearch.txt'],
-        actions:[
-          {
-            name: 'RegExpObjectSearch',
-            search: new RegExp('\\[\\d{3}(\\w+)\\]'),
-            replace : '[$1]',
-          },
-          {
-            name: 'RegExpObjectSearchSlash',
-            search: /\[(\w+)\d{3}\]/,
-            replace: '[$1]'
-          }
-        ]
-      },
-      replacefunction:{
-        src: ['test/actual/replacefunction.txt'],
-        actions: [
-          {
-            name: 'ReplaceFunction',
-            search: '[a-z]+\\d+[a-z]+',
-            replace: function(){
-              return 'foofoofoo';
-            }
-          }
-        ]
-      }
     },
     nodeunit: {
       all: ['test/**/*test.js']
+    },
+    "jsp-cleaner": {
+      test: {
+        src: 'test/fixtures/regexReplace.txt',
+        actions: [
+          {
+            type: 'var-replace',
+            constants: {
+              variable1: 'Constant Number 1',
+              variable2: 'Constant Number 2',
+              variable3: 'Constant Number 3'
+            }
+          },
+          {
+
+          }
+        ]
+      }
     }
   });
   //Load dependency tasks
@@ -122,7 +60,7 @@ module.exports = function(grunt) {
   // Load local tasks.
   grunt.loadTasks('tasks');
   grunt.registerTask('default', ['test']);
-  grunt.registerTask('test', ['clean-test-data', 'jshint', 'copy:fixtures', 'build-test-data', 'nodeunit']);
-
+  grunt.registerTask('test', ['jshint', 'nodeunit']);
+  grunt.registerTask('cleaner', ['jsp-cleaner']);
 };
 
