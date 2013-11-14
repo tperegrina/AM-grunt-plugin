@@ -34,18 +34,28 @@ module.exports = function(grunt) {
     },
     "jsp-cleaner": {
       test: {
-        src: 'test/fixtures/regexReplace.txt',
+        src: 'test/fixtures/varReplace.txt',
+        dest: 'test/temp/varReplace.txt',
         actions: [
           {
-            type: 'var-replace',
+            type: 'replace',
             constants: {
               variable1: 'Constant Number 1',
               variable2: 'Constant Number 2',
               variable3: 'Constant Number 3'
             }
-          },
-          {
-
+          }, {
+            type: 'replace',
+            prefix: 'c',
+            constants: {
+              variable1: 'prefixed Constant1',
+              variable2: 'prefixed Constant2'
+            }
+          }, {
+            type: 'clean'
+          }, {
+            type: 'clean',
+            prefix: 'c'
           }
         ]
       }

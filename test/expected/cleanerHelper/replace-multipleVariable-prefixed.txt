@@ -1,0 +1,14 @@
+<%=variable1%>
+<%= variable1%>
+<%=   variable1%>
+<%=vAriABle1%>
+<%=variable2%>
+<%=variable3%>
+
+#prefixed variables
+
+prefixed Constant1
+prefixed Constant1
+prefixed Constant2
+prefixed Constant3
+<d:out value="${variable3}"></d:out>
