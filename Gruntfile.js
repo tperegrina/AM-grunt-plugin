@@ -33,9 +33,9 @@ module.exports = function(grunt) {
       all: ['test/**/*test.js']
     },
     "jsp-cleaner": {
-      test: {
-        src: 'test/fixtures/varReplace.txt',
-        dest: 'test/temp/varReplace.txt',
+      "e2e-test" :{
+        src: 'test/fixtures/e2e-test-fixture.txt',
+        dest: 'test/temp/e2e-test.txt',
         actions: [
           {
             type: 'replace',
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
   // Load local tasks.
   grunt.loadTasks('tasks');
   grunt.registerTask('default', ['test']);
-  grunt.registerTask('test', ['jshint', 'nodeunit']);
+  grunt.registerTask('test', ['jshint','jsp-cleaner:e2e-test', 'nodeunit', 'clean']);
   grunt.registerTask('cleaner', ['jsp-cleaner']);
 };
 

@@ -85,6 +85,18 @@ exports.textReplace = {
     'jsp cleaner should delete instances of prefixed JSP markup': function (test) {
       test.equal(ch.jspClean('<c:instruction>body</c:instruction>', 'c'), '');
       test.done();
+    },
+    'jsp cleaner should delete multiline instances of prefixed JSP markup' : function (test) {
+      test.equal(ch.jspClean('<c:instruction>\nbody\n</c:instruction>', 'c'), '');
+      test.done();
+    }
+  },
+  'End to end plugin tests': {
+    'Jsp Cleaner plugin should open an html file and perform a series of tasks on it': function (test) {
+      var testFile = grunt.file.read('test/temp/e2e-test.txt'),
+          expectedFile = grunt.file.read('test/expected/e2e-test-expected.txt');
+      test.equal(testFile, expectedFile);
+      test.done();
     }
   }
 };

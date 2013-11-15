@@ -1,3 +1,0 @@
-Goodbye world
-hello world
-regexReplace.txt

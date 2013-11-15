@@ -14,7 +14,6 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('jsp-cleaner', 'remove or replace jsp markup', function(){
     var fileAddr = this.data.src,
         content,
-        modifiedContent,
         actions = this.data.actions,
         writeAddr = this.data.dest;
 
@@ -25,17 +24,18 @@ module.exports = function(grunt) {
     for (var i = 0; i < actions.length; i++) {
       switch (actions[i].type) {
         case 'replace':
-          modifiedContent = cleanerHelper.varReplace(content, actions[i].constants, actions[i].prefix);
+          content = cleanerHelper.varReplace(content, actions[i].constants, actions[i].prefix);
           break;
         case 'clean':
-          modifiedContent = cleanerHelper.jspClean(content, actions[i].prefix);
+          content = cleanerHelper.jspClean(content, actions[i].prefix);
           break;
         default:
           grunt.log.error('Incorrect action type');
           break;
       }
+      grunt.log.writeln(content);
+      grunt.file.write(writeAddr, content);
     }
-    grunt.file.write(writeAddr, modifiedContent);
   });
 
 };

@@ -1,0 +1,21 @@
+<html>
+
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+  <%=variable1%>
+  <%=variable2%>
+  <%=variable3%>
+  <c:out value="${variable1}"></c:out>
+  <c:out value="${variable2}"></c:out>
+
+  <body>
+    <c:if>
+      Should be deleted
+    </c:if>
+    <div>
+      Valor
+    </div>
+
+  </body>
+
+</html>
